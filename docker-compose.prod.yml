@@ -1,0 +1,32 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.prod
+    ports:
+      - "${BACKEND_PORT:-8005}:8080"  # Host port from env, defaults to 8005 -> Container port 8080
+    env_file:
+      - .env
+    environment:
+      - GIN_MODE=${GIN_MODE:-release}
+    volumes:
+      - /app/tmp
+    networks:
+      - cc-lippstadt-network
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "4002:3000"  # Host port 4002 -> Container port 3000
+    environment:
+      - NODE_ENV=${NODE_ENV:-production}
+      - SITE_URL=${SITE_URL}
+    restart: unless-stopped
+
+networks:
+  cc-lippstadt-network:
+    external: true
+
