@@ -1,19 +1,22 @@
 <template>
   <div>
     <Header />
-    <main>
-      Cavalry Chapel Lippstadt
-    </main>
+    <Hero />
+    <Footer />
   </div>
 </template>
 
 <script>
 import Header from './components/Header.vue'
+import Hero from './components/Hero.vue'
+import Footer from './components/Footer.vue'
 
 export default {
   name: 'App',
   components: {
-    Header
+    Header,
+    Hero,
+    Footer
   }
 }
 </script>

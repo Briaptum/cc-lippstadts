@@ -10,13 +10,16 @@
             <a href="/" :class="['nav-link transition-colors', isActive('/') ? 'text-brand-peach font-semibold' : 'text-brand-steelblue hover:text-brand-peach']" @click="updateCurrentPath()">Home</a>
           </li>
           <li>
-            <a href="/about" :class="['nav-link transition-colors', isActive('/about') ? 'text-brand-peach font-semibold' : 'text-brand-steelblue hover:text-brand-peach']" @click="updateCurrentPath()">About</a>
-          </li>
-          <li>
-            <a href="/services" :class="['nav-link transition-colors', isActive('/services') ? 'text-brand-peach font-semibold' : 'text-brand-steelblue hover:text-brand-peach']" @click="updateCurrentPath()">Services</a>
-          </li>
-          <li>
             <a href="/events" :class="['nav-link transition-colors', isActive('/events') ? 'text-brand-peach font-semibold' : 'text-brand-steelblue hover:text-brand-peach']" @click="updateCurrentPath()">Events</a>
+          </li>
+          <li>
+            <a href="/teachings" :class="['nav-link transition-colors', isActive('/teachings') ? 'text-brand-peach font-semibold' : 'text-brand-steelblue hover:text-brand-peach']" @click="updateCurrentPath()">Teachings</a>
+          </li>
+          <li>
+            <a href="/mission" :class="['nav-link transition-colors', isActive('/mission') ? 'text-brand-peach font-semibold' : 'text-brand-steelblue hover:text-brand-peach']" @click="updateCurrentPath()">Mission</a>
+          </li>
+          <li>
+            <a href="/donation" :class="['nav-link transition-colors', isActive('/donation') ? 'text-brand-peach font-semibold' : 'text-brand-steelblue hover:text-brand-peach']" @click="updateCurrentPath()">Donation</a>
           </li>
           <li>
             <a href="/contact" :class="['nav-link transition-colors', isActive('/contact') ? 'text-brand-peach font-semibold' : 'text-brand-steelblue hover:text-brand-peach']" @click="updateCurrentPath()">Contact</a>
@@ -48,13 +51,16 @@
               <a href="/" :class="['nav-link block transition-colors', isActive('/') ? 'text-brand-peach font-semibold' : 'text-brand-steelblue hover:text-brand-peach']" @click="menuOpen = false; updateCurrentPath()">Home</a>
             </li>
             <li class="menu-item">
-              <a href="/about" :class="['nav-link block transition-colors', isActive('/about') ? 'text-brand-peach font-semibold' : 'text-brand-steelblue hover:text-brand-peach']" @click="menuOpen = false; updateCurrentPath()">About</a>
-            </li>
-            <li class="menu-item">
-              <a href="/services" :class="['nav-link block transition-colors', isActive('/services') ? 'text-brand-peach font-semibold' : 'text-brand-steelblue hover:text-brand-peach']" @click="menuOpen = false; updateCurrentPath()">Services</a>
-            </li>
-            <li class="menu-item">
               <a href="/events" :class="['nav-link block transition-colors', isActive('/events') ? 'text-brand-peach font-semibold' : 'text-brand-steelblue hover:text-brand-peach']" @click="menuOpen = false; updateCurrentPath()">Events</a>
+            </li>
+            <li class="menu-item">
+              <a href="/teachings" :class="['nav-link block transition-colors', isActive('/teachings') ? 'text-brand-peach font-semibold' : 'text-brand-steelblue hover:text-brand-peach']" @click="menuOpen = false; updateCurrentPath()">Teachings</a>
+            </li>
+            <li class="menu-item">
+              <a href="/mission" :class="['nav-link block transition-colors', isActive('/mission') ? 'text-brand-peach font-semibold' : 'text-brand-steelblue hover:text-brand-peach']" @click="menuOpen = false; updateCurrentPath()">Mission</a>
+            </li>
+            <li class="menu-item">
+              <a href="/donation" :class="['nav-link block transition-colors', isActive('/donation') ? 'text-brand-peach font-semibold' : 'text-brand-steelblue hover:text-brand-peach']" @click="menuOpen = false; updateCurrentPath()">Donation</a>
             </li>
             <li class="menu-item">
               <a href="/contact" :class="['nav-link block transition-colors', isActive('/contact') ? 'text-brand-peach font-semibold' : 'text-brand-steelblue hover:text-brand-peach']" @click="menuOpen = false; updateCurrentPath()">Contact</a>
@@ -222,6 +228,7 @@ header {
 .menu-item:nth-child(3) { animation-delay: 0.15s; }
 .menu-item:nth-child(4) { animation-delay: 0.2s; }
 .menu-item:nth-child(5) { animation-delay: 0.25s; }
+.menu-item:nth-child(6) { animation-delay: 0.3s; }
 
 @keyframes fadeInUp {
   from {
