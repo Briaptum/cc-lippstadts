@@ -1,5 +1,5 @@
 <template>
-  <section class="hero-section relative overflow-hidden w-full" style="margin: 0; padding: 0; width: 100vw;">
+  <section class="hero-section relative overflow-hidden w-full" style="margin: 0; padding: 0; width: 100vw;" @mouseenter="pauseAutoplay" @mouseleave="resumeAutoplay">
     <div class="banner-container relative w-full" :class="{ 'banner-loaded': isLoaded }" style="width: 100vw;">
       <div 
         v-for="(image, index) in banners" 
@@ -34,7 +34,7 @@
       
       <!-- Navigation arrows -->
       <button
-        @click="previousSlide"
+        @click="handlePrevClick"
         class="nav-button nav-button-prev absolute top-1/2 z-10 bg-black bg-opacity-50 hover:bg-opacity-70 text-white rounded-full transition-all duration-300 shadow-lg cursor-pointer nav-arrow"
         :class="{ 'arrow-loaded': isLoaded }"
         aria-label="Previous slide"
@@ -44,7 +44,7 @@
         </svg>
       </button>
       <button
-        @click="nextSlide"
+        @click="handleNextClick"
         class="nav-button nav-button-next absolute top-1/2 z-10 bg-black bg-opacity-50 hover:bg-opacity-70 text-white rounded-full transition-all duration-300 shadow-lg cursor-pointer nav-arrow"
         :class="{ 'arrow-loaded': isLoaded }"
         aria-label="Next slide"
@@ -74,10 +74,27 @@ export default {
     
     const previousSlide = () => {
       currentIndex.value = (currentIndex.value - 1 + banners.length) % banners.length
+      // Restart autoplay after manual navigation
+      stopAutoplay()
+      startAutoplay()
+    }
+    
+    const handleNextClick = () => {
+      nextSlide()
+      // Restart autoplay after manual navigation
+      stopAutoplay()
+      startAutoplay()
+    }
+    
+    const handlePrevClick = () => {
+      previousSlide()
     }
     
     const goToSlide = (index) => {
       currentIndex.value = index
+      // Restart autoplay after manual navigation
+      stopAutoplay()
+      startAutoplay()
     }
     
     const handleImageError = (event) => {
@@ -94,9 +111,11 @@ export default {
     }
     
     const startAutoplay = () => {
+      // Clear any existing interval first
+      stopAutoplay()
       autoplayInterval = setInterval(() => {
         nextSlide()
-      }, 5000) // Change slide every 5 seconds
+      }, 2000) // Change slide every 2 seconds
     }
     
     const stopAutoplay = () => {
@@ -104,6 +123,14 @@ export default {
         clearInterval(autoplayInterval)
         autoplayInterval = null
       }
+    }
+    
+    const pauseAutoplay = () => {
+      stopAutoplay()
+    }
+    
+    const resumeAutoplay = () => {
+      startAutoplay()
     }
     
     onMounted(() => {
@@ -130,10 +157,14 @@ export default {
       nextSlide,
       previousSlide,
       goToSlide,
+      handleNextClick,
+      handlePrevClick,
       handleImageError,
       handleImageLoad,
       startAutoplay,
-      stopAutoplay
+      stopAutoplay,
+      pauseAutoplay,
+      resumeAutoplay
     }
   }
 }

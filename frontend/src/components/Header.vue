@@ -2,15 +2,26 @@
   <header class="bg-white border-b border-gray-200">
     <nav class="container mx-auto px-4 py-4">
       <div class="flex items-center relative">
-        <a href="/" class="flex items-center">
+        <router-link to="/" class="flex items-center">
           <img src="/images/ccl-logo.png" alt="Cavalry Chapel Lippstadt Logo" class="h-16" />
-        </a>
+        </router-link>
         <ul class="menu-desktop items-center gap-6 flex-1 justify-center">
-          <li>
-            <a href="/" :class="['nav-link transition-colors', isActive('/') ? 'text-brand-peach font-semibold' : 'text-brand-steelblue hover:text-brand-peach']" @click="updateCurrentPath()">Home</a>
+          <li class="dropdown-container">
+            <router-link to="/" :class="['nav-link transition-colors', $route.path === '/' ? 'text-brand-peach font-semibold' : 'text-brand-steelblue hover:text-brand-peach']">Home</router-link>
+            <ul class="dropdown-menu">
+              <li>
+                <router-link to="/who-we-are" class="dropdown-item" @click="menuOpen = false">Who we are</router-link>
+              </li>
+              <li>
+                <router-link to="/team" class="dropdown-item" @click="menuOpen = false">Team</router-link>
+              </li>
+              <li>
+                <router-link to="/community" class="dropdown-item" @click="menuOpen = false">Community</router-link>
+              </li>
+            </ul>
           </li>
           <li>
-            <a href="/events" :class="['nav-link transition-colors', isActive('/events') ? 'text-brand-peach font-semibold' : 'text-brand-steelblue hover:text-brand-peach']" @click="updateCurrentPath()">Events</a>
+            <router-link to="/events" :class="['nav-link transition-colors', $route.path === '/events' ? 'text-brand-peach font-semibold' : 'text-brand-steelblue hover:text-brand-peach']">Events</router-link>
           </li>
           <li>
             <a href="/teachings" :class="['nav-link transition-colors', isActive('/teachings') ? 'text-brand-peach font-semibold' : 'text-brand-steelblue hover:text-brand-peach']" @click="updateCurrentPath()">Teachings</a>
@@ -48,10 +59,10 @@
         <div v-if="menuOpen" class="menu-mobile mt-4 pb-4">
           <ul class="flex flex-col gap-4 items-center">
             <li class="menu-item">
-              <a href="/" :class="['nav-link block transition-colors', isActive('/') ? 'text-brand-peach font-semibold' : 'text-brand-steelblue hover:text-brand-peach']" @click="menuOpen = false; updateCurrentPath()">Home</a>
+              <router-link to="/" :class="['nav-link block transition-colors', $route.path === '/' ? 'text-brand-peach font-semibold' : 'text-brand-steelblue hover:text-brand-peach']" @click="menuOpen = false">Home</router-link>
             </li>
             <li class="menu-item">
-              <a href="/events" :class="['nav-link block transition-colors', isActive('/events') ? 'text-brand-peach font-semibold' : 'text-brand-steelblue hover:text-brand-peach']" @click="menuOpen = false; updateCurrentPath()">Events</a>
+              <router-link to="/events" :class="['nav-link block transition-colors', $route.path === '/events' ? 'text-brand-peach font-semibold' : 'text-brand-steelblue hover:text-brand-peach']" @click="menuOpen = false">Events</router-link>
             </li>
             <li class="menu-item">
               <a href="/teachings" :class="['nav-link block transition-colors', isActive('/teachings') ? 'text-brand-peach font-semibold' : 'text-brand-steelblue hover:text-brand-peach']" @click="menuOpen = false; updateCurrentPath()">Teachings</a>
@@ -262,8 +273,79 @@ header {
   width: 100%;
 }
 
-.nav-link.text-brand-peach::after {
-  width: 100%;
+/* Cross indicator for active links */
+.nav-link.text-brand-peach::before {
+  content: '';
+  position: absolute;
+  bottom: -7px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 2px;
   background-color: var(--brand-peach);
+}
+
+.nav-link.text-brand-peach::after {
+  content: '';
+  position: absolute;
+  bottom: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 12px;
+  background-color: var(--brand-peach);
+}
+
+/* Keep hover underline for non-active links */
+.nav-link:not(.text-brand-peach):hover::after {
+  width: 100%;
+}
+
+/* Dropdown menu styles */
+.dropdown-container {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 8px;
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  min-width: 180px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease-out, visibility 0.2s ease-out, transform 0.2s ease-out;
+  transform: translateX(-50%) translateY(-10px);
+  z-index: 1000;
+  list-style: none;
+  padding: 8px 0;
+}
+
+.dropdown-container:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.dropdown-item {
+  display: block;
+  padding: 10px 20px;
+  color: var(--brand-steelblue);
+  text-decoration: none;
+  transition: background-color 0.2s ease-out, color 0.2s ease-out;
+}
+
+.dropdown-item:hover {
+  background-color: #f9fafb;
+  color: var(--brand-peach);
+}
+
+.dropdown-item::after {
+  display: none;
 }
 </style>

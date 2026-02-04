@@ -3,11 +3,13 @@
 :root {
   --brand-peach: #CABBA0;
   --brand-steelblue: #576270;
+  --brand-red: #DD0000;
 }
 
 @theme {
   --color-brand-peach: #CABBA0;
   --color-brand-steelblue: #576270;
+  --color-brand-red: #DD0000;
 }
 
 body {
